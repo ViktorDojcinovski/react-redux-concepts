@@ -5,7 +5,7 @@ import Header from "./components/header.component";
 import TodoList from "./components/todo-list.component";
 import Footer from "./components/footer.component";
 
-import { addNewTodo, changeCompletedTodo } from "../../redux";
+import { addNewTodo, changeCompletedTodo } from "../../redux/todos/actions";
 
 export const Todos = ({ todos, addTodo, changeCompleted, ...props }) => {
   return (
@@ -20,7 +20,9 @@ export const Todos = ({ todos, addTodo, changeCompleted, ...props }) => {
           <h2>Todos</h2>
           <div className="todoapp">
             <Header addTodo={addTodo} />
-            <TodoList todos={todos} onChangeCompleted={changeCompleted} />
+            {todos && (
+              <TodoList todos={todos} onChangeCompleted={changeCompleted} />
+            )}
             <Footer />
           </div>
         </section>
@@ -30,7 +32,7 @@ export const Todos = ({ todos, addTodo, changeCompleted, ...props }) => {
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todos,
+  todos: state.todos.todos,
 });
 
 const mapDispatchToProps = (dispatch) => ({

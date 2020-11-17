@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { incrementCounter, decrementCounter } from "../../redux";
+import {
+  incrementCounter,
+  decrementCounter,
+} from "../../redux/counter/actions";
 
 function Counter(props) {
   return (

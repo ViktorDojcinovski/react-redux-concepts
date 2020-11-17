@@ -2,6 +2,7 @@ import React from "react";
 import TodoListItem from "./todo-list-item.component";
 
 const TodoList = ({ todos, onChangeCompleted }) => {
+  console.log(todos);
   const renderedListItems = todos.map((todo) => {
     return (
       <TodoListItem
