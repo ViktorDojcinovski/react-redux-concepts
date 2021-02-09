@@ -1,12 +1,7 @@
-import { ADD_NEW_TODO, CHANGE_COMPLETED_TODO } from "./types";
+import { ADD_NEW_TODO, CHANGE_COMPLETED_TODO, FETCH_TODOS } from "./types";
 
 const INITIAL_STATE = {
-  todos: [
-    { id: 0, text: "Learn React", completed: true },
-    { id: 1, text: "Learn Redux", completed: false },
-    { id: 2, text: "Build something fun!", completed: false },
-    { id: 3, text: "Build something simple!", completed: false },
-  ],
+  todos: [],
 };
 
 function nextTodoId(todos) {
@@ -23,7 +18,7 @@ export const todosReducer = (state = INITIAL_STATE, action) => {
           ...state.todos,
           {
             id: nextTodoId(state.todos),
-            text: action.payload,
+            title: action.payload,
             completed: false,
           },
         ],
@@ -38,6 +33,11 @@ export const todosReducer = (state = INITIAL_STATE, action) => {
             return todo;
           }
         }),
+      };
+    case FETCH_TODOS:
+      return {
+        ...state,
+        todos: action.payload,
       };
     default:
       return {

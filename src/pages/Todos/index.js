@@ -5,23 +5,37 @@ import Header from "./components/header.component";
 import TodoList from "./components/todo-list.component";
 import Footer from "./components/footer.component";
 
-import { addNewTodo, changeCompletedTodo } from "../../redux/todos/actions";
+import {
+  addNewTodo,
+  changeCompletedTodo,
+  fetchTodosAsync,
+} from "../../redux/todos/actions";
 
-export const Todos = ({ todos, addTodo, changeCompleted, ...props }) => {
+export const Todos = ({
+  todos,
+  addTodo,
+  fetchTodos,
+  changeCompleted,
+  ...props
+}) => {
   return (
     <div className="App">
       <nav>
         <section>
-          <h1>My Todos App with Redux</h1>
+          <h1>My Todos App</h1>
         </section>
       </nav>
       <main>
         <section className="medium-container">
-          <h2>Todos</h2>
+          <h2>List of Todos</h2>
           <div className="todoapp">
             <Header addTodo={addTodo} />
             {todos && (
-              <TodoList todos={todos} onChangeCompleted={changeCompleted} />
+              <TodoList
+                todos={todos}
+                fetchTodos={fetchTodos}
+                onChangeCompleted={changeCompleted}
+              />
             )}
             <Footer />
           </div>
@@ -38,6 +52,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addTodo: (e) => dispatch(addNewTodo(e)),
   changeCompleted: (e) => dispatch(changeCompletedTodo(e)),
+  fetchTodos: () => dispatch(fetchTodosAsync()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);
